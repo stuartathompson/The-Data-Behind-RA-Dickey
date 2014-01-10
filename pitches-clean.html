@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script src="jquery.js" type="text/javascript"></script>
+<link rel="stylesheet" href="http://beta.images.theglobeandmail.com/media/www/css/global.fonts.css">
+<!-- Raphael -->
+<script src="raphael-min.js"></script>
+<!-- Data -->
+<script src="pitches-assets/pitches.js"></script>
+<script src="pitches-assets/pitches-bestday.js"></script>
+<!-- Jquery -->
+<script src="pitches-assets/jquery-ui-1.10.2.custom.min.js"></script>
+<link rel="stylesheet" href="pitches-assets/ui-lightness/jquery-ui-1.10.2.custom.min.css">
+
+<style type="text/css">
+a{outline:none;}
+body {
+    background: white;
+    color: #333;
+    font: normal normal 12px/1.5 Verdana, Helvetica, Arial, sans-serif;
+}
+@font-face {
+    font-family: 'LeagueGothicRegular';
+    src: url('pitches-assets/League_Gothic-webfont.eot');
+    src: url('pitches-assets/League_Gothic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('pitches-assets/League_Gothic-webfont.woff') format('woff'),
+         url('pitches-assets/League_Gothic-webfont.ttf') format('truetype'),
+         url('pitches-assets/League_Gothic-webfont.svg#LeagueGothicRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.gi-clearfloat{
+	width:100%;
+	clear:both;
+	height:1px;
+}
+#gi{
+	width:940px;
+	margin:0 auto;
+	position: relative;
+	font-size:17px;
+	line-height:1.7;
+	font-family:"PrattRegular",Arial,sans-serif;
+}
+#gi strong{
+	font-family:"LeagueGothicRegular",Arial,sans-serif;
+	font-weight:normal;
+	font-size:20px;
+	text-transform: uppercase;
+}
+.gi-button{
+	display:block;
+	background-image:url('pitches-assets/play.png');
+	background-repeat:no-repeat;
+	background-position: 10px 15px;
+	font-family:"LeagueGothicRegular","PrattHeavy",sans-serif;
+	font-size:18px;
+	color:white;
+	background-color:#d60000;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border:3px;
+	float:left;
+	clear:both;
+	padding:5px 18px 5px 25px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+.gi-button:hover{
+	background-color:rgb(238, 68, 68);
+	color:white;
+}
+.gi-section{
+	width:100%;
+	margin:0 20px;
+	margin-top:40px;
+	clear:both;
+	float:left;
+}
+.gi-section.right{
+	text-align:right;
+}
+.gi-section.right p,.gi-section.right .gi-button{
+	float:right;
+}
+
+#gi #search-input label{
+	width:100px;
+	display:block;
+	float:left;
+	line-height:2;
+	margin-right: 27px;
+}
+#gi #search-input input{
+	padding:5px;
+	width:252px;
+	font-size:12px;
+	border:1px solid rgb(213, 213, 213);
+	border-radius: 5px;
+	margin-bottom:5px;
+	outline:none;
+}
+#gi select{
+	width:252px;
+	font-size:12px;
+}
+#gi input:focus{
+	border:1px solid #b0b0b0;
+}
+#gi p{
+	margin:0 0 10px 0;
+	padding:0;
+	width:650px;
+}
+#gi h3, #gi h2,#gi h4,#gi-header,#gi-header-2{
+	font-family:'LeagueGothicRegular','PrattHeavy',sans-serif;
+	font-weight:normal;
+	text-transform: uppercase;
+}
+#gi-header-2{
+font-size: 121px;
+margin: 0;
+padding: 0 0 20px 0;
+height: 160px;
+}
+#gi-header{
+font-size: 47px !important;
+margin-top: 20px;
+height: 10px;
+}
+#gi h3{
+	font-size:54px;
+	color:#4c87d6;
+	margin: 40px 0 0;
+	padding:0;
+}
+#gi h4{
+text-align: center;
+font-size: 20px;
+margin: 0;
+padding: 0;
+margin-bottom: -77px;
+border-top: 1px solid #ececec;
+padding-top: 22px;
+}
+#gi .noline h4{
+	border-top:0 !important;
+}
+.viz-con{
+	float:left;
+	position: relative
+}
+.tooltip{
+text-align: center;
+margin-top: -71px;
+padding-bottom: 60px;
+font-family: "LeagueGothicRegular",Helvetica,sans-serif;
+color: #4c87d6;
+position: absolute;
+left: 0;
+bottom: -7px;
+width: 300px;
+}
+#gi-intro{
+	width:940px;
+	height:637px;
+	position:relative;
+}
+#gi-intro-text{
+	position:absolute;
+	color:white;
+	top:0px;
+	left:20px;
+	z-index:10;
+	width:475px;
+	font-size:20px;
+	line-height:1.8;
+}
+#gi-intro-text p{
+	width:475px;
+}
+#gi-intro-bg{
+	position:absolute;
+	top:0;
+	left:-20px;
+	width:1000px;
+	height:100%;
+	z-index:1;
+}
+#gi-intro-bg img{
+	width:100%;
+	height:100%;
+}
+#search-input{
+	float:left;
+	width:400px;
+}
+
+#search-viz{
+	width:300px;
+	margin-right: 50px;
+	float:right;
+}
+#search-toggle{
+float: left;
+display: none;
+width: 152px;
+font-family: "LeagueGothicRegular",Helvetica,sans-serif;
+font-size: 16px;
+text-transform: uppercase;
+margin-left: 27px;
+}
+#search-toggle input{
+	width:auto;
+	float:left;
+}
+.likely-pitch{
+	font-family:"PrattRegular",sans-serif;
+	font-size:14px;
+	text-transform: none !important;
+}
+.search-error, #skip-animation,#IE-warning{
+	width:200px;
+	margin:-5px 0 0 10px;
+	float:left;
+	font-family:"LeagueGothicRegular",Helvetica,sans-serif;
+	font-size:20px;
+	color:#b0b0b0;
+	display:none;
+}
+#skip-animation a{
+	color:#d60000;
+}
+#fball-tooltips{
+	position: relative;
+	float:left;
+}
+.fball-tooltip{
+position: absolute;
+z-index: 9999;
+display: none;
+width: 196px;
+background-color: white;
+border: 1px solid #ececec;
+box-shadow: 3px 3px 3px #ececec;
+font-size: 12px;
+padding: 10px 34px;
+font-family:helvetica, arial,sans-serif;
+right:0;
+top:0;
+}
+.fball-tooltip h4{
+margin: 0 0 10px 0 !important;
+padding: 0 !important;
+border-top: 0 !important;
+border-bottom: 1px solid #ececec;
+}
+.fball-tooltip .gi-button{
+	font-size:12px;
+	background-color:#4c87d6;
+	background-image:none;
+	padding:5px 18px !important;
+	margin:5px 0;
+	float:right;
+}
+.ball-tooltip .gi-button:hover{
+	background-color:rgb(105, 162, 238) !important;
+}
+#fball-ttip1{
+	top: 223px;
+	right: 396px;
+}
+#fball-ttip2{
+	right: 95px;
+}
+#fball-ttip3{
+	left: 189px;
+}
+
+/* - Autofill changes - */
+.ui-autocomplete,.ui-datepicker{
+width: 258px;
+top: 906px;
+left: 369px;
+background-image: none;
+background-color: white;
+font-family: Helvetica,Arial,sans-serif;
+font-size: 12px;
+}
+a.ui-state-focus{
+	background-image:none !important;
+	background-color:#f0f0f0 !important;
+	color:#4c87d6 !important;
+	border:none !important;
+}
+/* Smartphones -------------------------------*/
+@media screen and (max-width: 480px) {
+	#gi p, #gi,.gi-chart{
+		margin-left:0;
+		width:100%;
+	}
+
+}
+</style>
+
+<script type="text/javascript">
+$('document').ready(function(){
+function addCommas(nStr)
+{
+	nStr += '';
+	x = nStr.split('.');
+	x1 = x[0];
+	x2 = x.length > 1 ? '.' + x[1] : '';
+	var rgx = /(\d+)(\d{3})/;
+	while (rgx.test(x1)) {
+		x1 = x1.replace(rgx, '$1' + ',' + '$2');
+	}
+	return x1 + x2;
+}
+
+/* - Check the browser and determine the viz - */
+    var userAgent = navigator.userAgent.toLowerCase();
+
+    // Figure out what browser is being used.
+    var Browser = {
+        Version: (userAgent.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1],
+        Chrome: /chrome/.test(userAgent),
+        Safari: /webkit/.test(userAgent),
+        Opera: /opera/.test(userAgent),
+        IE: /msie/.test(userAgent) && !/opera/.test(userAgent),
+        Mozilla: /mozilla/.test(userAgent) && !/(compatible|webkit)/.test(userAgent),
+        Check: function() { alert(userAgent); }
+    };
+
+/* - Viz vars */
+var pitcher = 700,
+	plate = 200,
+	horizontal = 200,
+	mult = 20,
+	pitchPaths = [],
+	speeds = [],
+	colors = ['red','gray'];
+
+/*- Heat maps -*/
+var homeBase = 150,
+	w = 300,
+	h = 250,
+	mult = 50,
+	balls = [],
+	ballsFinal = [],
+	strikes = [],
+	hoverC,
+	hoverB,
+	hoverTrack,
+	ballWidth = 16,
+	fadeout = Raphael.animation({'opacity':.1},1000),
+	grow = Raphael.animation({'r':ballWidth/2+4},150),
+	fadein = Raphael.animation({'opacity':.4},250),
+	sizeTop = 3.418268772,
+	sizeBottom = 1.584150775,
+	strikeZoneX = homeBase-((1.6*mult)/2),
+	strikeZoneY = h-(3.5*mult),
+	strikeZoneW = 1.6*mult,
+	strikeZoneH = (3.5*mult)-(1.5*mult),
+	inningBalls = [],
+	ballsFirst = [],
+	ballsShadow = [],
+	batterNames = [];
+
+$.each($('.smallMultiple'),function(n){
+var viz = Raphael('strikezone' + n,w,h);
+
+var strikezone = viz.rect(strikeZoneX,strikeZoneY,strikeZoneW,strikeZoneH).attr({'fill':'white','stroke':'#b0b0b0','stroke-width':3,'opacity':.7});
+
+var theseBalls = [],
+	theseBallsFinal = [],
+	theseBallsFirst = [],
+	theseStrikes = [],
+	theseShadows = [],
+	theseNames = [];
+	
+$.each(pitches,function(i,pitch){
+	color = colors[1];
+
+// Switch query based on viz number
+	if(pitch["GAME_DATE"] == "2012-06-18" && pitch["INNING"] == (n+1)){
+	color = colors[0];
+
+	var ball = viz.image("pitches-assets/baseball.png",homeBase+pitch["PLATE_X"]*(mult),h-(pitch["PLATE_Z"])*(mult),16,16).attr('opacity',1);
+
+	var ballShadow = viz.circle((homeBase+(pitch["PLATE_X"])*mult)+ballWidth/2,(h-(pitch["PLATE_Z"])*mult)+ballWidth/2,ballWidth/2).attr({'stroke':'none','opacity':.4});
+
+	// Save type of pitch
+	var color = '#4c87d6';
+	if(pitch["PITCH_TYPE"] == 'ball' || pitch["PITCH_TYPE"] == 'blocked_ball'|| pitch["PITCH_TYPE"] == 'intent_ball'|| pitch["PITCH_TYPE"] == 'pitchout'|| pitch["PITCH_TYPE"] == 'balk' || pitch["PITCH_TYPE"] == 'intent_walk'||  pitch["PITCH_TYPE"] == 'hit_by_pitch' || pitch["PITCH_TYPE"] == 'passed_ball'|| pitch["PITCH_TYPE"] == 'walk'|| pitch["PITCH_TYPE"] == 'wild_pitch'){
+		color = '#f0c810';
+	} else if (pitch["PITCH_TYPE"] == 'home_run' || pitch["PITCH_TYPE"] == 'single'  || pitch["PITCH_TYPE"] == 'triple'  || pitch["PITCH_TYPE"] == 'double'){
+		color = '#4c87d6';
+	} else {
+		color = '#d60000';
+	}
+
+	ballShadow.attr({'fill':color});
+	
+	// Save the vars
+	strikes.push(i);
+	theseBalls.push(ball);
+	theseShadows.push(ballShadow);
+	theseBallsFirst.push([homeBase+(pitch["INIT_POS_X"])*mult,h-(pitch["INIT_POS_Z"])*mult]);
+	theseBallsFinal.push([homeBase+(pitch["PLATE_X"])*mult,h-(pitch["PLATE_Z"])*mult]);
+	theseNames.push(pitch["BATTER_NAME"]);
+	}
+})//each.pitches
+
+inningBalls.push(theseBalls);
+ballsFirst.push(theseBallsFirst);
+ballsFinal.push(theseBallsFinal);
+ballsShadow.push(theseShadows);
+batterNames.push(theseNames);
+
+// Save the vars
+strikes.push(theseStrikes);
+balls.push(theseBalls);
+
+})// each.smallMultiples
+
+var iTimer = '';
+$('#bestday-button').click(function(){
+	var aniStart = 0;
+	if(iTimer != '') clearInterval(iTimer);
+	$('.tooltip').hide();
+	
+	// Turn off balls
+	$.each(inningBalls, function(n){
+		$.each(this, function(i,ball){
+			ball.animate({'opacity':0},150);
+			ballsShadow[n][i].animate({'opacity':0},150);
+		});
+	});
+	function runInning(aniStart){
+		var inning = inningBalls[aniStart];
+		var length = inning.length-1;
+		iTimer = setInterval(function(){
+			inning[length].attr({'x':ballsFirst[aniStart][length][0],'y':ballsFirst[aniStart][length][1],'width':0,'height':0}).animate({'opacity':1,'x':ballsFinal[aniStart][length][0],'y':ballsFinal[aniStart][length][1],'width':16,'height':16},150);
+			ballsShadow[aniStart][length].animate(fadein.delay(500));
+			length--;
+			if(length<0) clearInterval(iTimer), iTimer = '', aniStart++, runInning(aniStart);
+			$('#strikezone' + aniStart).next().text(batterNames[aniStart][length]).show();
+		},150)
+	};
+	runInning(aniStart);
+})
+
+
+function animateBalls(n){
+theseBalls = balls[n];
+theseBallsFinal = ballsFinal[n];
+theseStrikes = strikes[n];
+i = theseBalls.length-1;
+
+setInterval(function(){
+	backOpacity = 0;
+	theseBalls[i].animate({'opacity':1,'width':ballWidth,'height':ballWidth,'x':theseBallsFinal[i][0],'y':theseBallsFinal[i][1]},250,'<>',function(){
+		if(!backOpacity) this.animate({'opacity':0},1000);
+	});
+	i = i-15;//--;
+	if(i<=0) clearInterval(this), showBalls(theseBalls);
+},50);
+}//animateBalls
+
+function showBalls(balls){
+	$.each(balls,function(){
+		this.animate({'opacity':1},1000);
+	})
+}//showBalls
+
+$('#smallMultiple-button').click(function(){
+	animateBalls(0)
+	var m = 1;
+	var multT = setInterval(function(){
+		animateBalls(m);
+		m++;
+		if(m==3) clearInterval(multT);
+	},10000)
+})
+
+/* - Fastball vs. Knuckleball - */
+
+var fBallW = 940,
+	fBallH = 400,
+	fastballT = '',
+	fastballViz = Raphael('viz-fastball',fBallW,fBallH),
+	knuckleMPHSize = 90,
+	knuckleMPHMPHSize = 20,
+	knuckleballSize = 150;
+
+if(Browser.IE){
+	knuckleMPHSize = 50,
+	knuckleMPHMPHSize = 10,
+	knuckleballSize = 75;
+	
+}
+	var knuckleMPH = fastballViz.text(0,fBallH/4-25,"51-76").attr({'font-family':"LeagueGothicRegular,Helvetica,sans-serif",'font-size':knuckleMPHSize,'text-anchor':'start','fill':'#4c87d6'}),
+		fastballMPH =fastballViz.text(0,fBallH/4+30,"RANGE OF SPEED (MPH)").attr({'font-family':"LeagueGothicRegular,Helvetica,sans-serif",'font-size':knuckleMPHMPHSize,'text-anchor':'start','fill':'#4c87d6'}),
+		knuckleMPHMPH = fastballViz.text(0,fBallH/4*3-25,"72-80").attr({'font-family':"LeagueGothicRegular,Helvetica,sans-serif",'font-size':knuckleMPHSize,'text-anchor':'start','fill':'#4c87d6'}),
+		fastballMPHMPH = fastballViz.text(0,fBallH/4*3+30,"RANGE OF SPEED (MPH)").attr({'font-family':"LeagueGothicRegular,Helvetica,sans-serif",'font-size':knuckleMPHMPHSize,'text-anchor':'start','fill':'#4c87d6'});
+		 
+	fastballViz.text(160,fBallH/4,"KNUCKLEBALL").attr({'font-family':"LeagueGothicRegular,Helvetica,sans-serif",'font-size':knuckleballSize,'text-anchor':'start','fill':'#ececec'});
+	fastballViz.text(160,fBallH/4*3,"FASTBALL").attr({'font-family':"LeagueGothicRegular,Helvetica,sans-serif",'font-size':knuckleballSize,'text-anchor':'start','fill':'#ececec'});
+
+var knuckleball = fastballViz.image("pitches-assets/baseball-lg-under.png",750,fBallH/4-50,100,100),
+	fastball = fastballViz.image("pitches-assets/baseball-lg-under.png",575,fBallH/4*3-50,100,100),
+	knuckleballShadow = fastballViz.image("pitches-assets/baseball-lg-shadow.png",750,fBallH/4-50,100,100),
+	fastballShadow = fastballViz.image("pitches-assets/baseball-lg-shadow.png",575,fBallH/4*3-50,100,100),
+	knuckleballArrow1 = fastballViz.image("pitches-assets/arrow-knuckleball.png",(fBallW+550)/2,fBallH/4-70,139,42).attr({'opacity':1}),
+	knuckleballArrow2 = fastballViz.image("pitches-assets/arrow-knuckleball.png",(fBallW+550)/2,fBallH/4+20,139,42).attr({'opacity':1}),
+	fastballArrow1 = fastballViz.image("pitches-assets/arrow-fastball.png",(fBallW+200)/2,fBallH/4*3-61,78,62).attr({'opacity':1}),
+	fastballArrow2 = fastballViz.image("pitches-assets/arrow-fastball.png",(fBallW+270)/2,fBallH/4*3,78,62).attr({'opacity':1,'transform':'r180'});
+
+$('#viz-fastball-button').click(function(){
+	if(fastballT != '') clearTimeout(fastballT);
+	setTimeout(function(){
+		knuckleball.attr({'transform':''});
+		fastball.attr({'transform':''});
+		knuckleballShadow.attr({'transform':''});
+		fastballShadow.attr({'transform':''});
+	},150)
+	
+	knuckleball.animate({'opacity':0},150);
+	fastball.animate({'opacity':0},150);
+	knuckleballShadow.animate({'opacity':0},150);
+	fastballShadow.animate({'opacity':0},150);
+	knuckleballArrow1.animate({'opacity':0},150);
+	fastballArrow1.animate({'opacity':0},150);
+	knuckleballArrow2.animate({'opacity':0},150);
+	fastballArrow2.animate({'opacity':0},150);
+	setTimeout(function(){
+
+	knuckleball.attr({'x':160}).animate({'opacity':1},250).animate({'transform':'t' + (((fBallW-100)/2)-200) + ',' + 0 + 'r-' + 540/2},8000/2*.8,">");
+	fastball.attr({'x':160}).animate({'opacity':1},250).animate({'transform':'t' + (fBallW-100)/2 + ',' + 0 + 'r-' + 6120/2},8000/2*.5,">");
+	knuckleballShadow.attr({'x':160}).animate({'opacity':1,'transform':'t' + (((fBallW-100)/2)-200) + ',' + 0},8000/2*.8,">");
+	fastballShadow.attr({'x':160}).animate({'opacity':1,'transform':'t' + (fBallW-100)/2 + ',' + 0},8000/2*.5,">");
+	
+	//knuckeball halfway
+	fastballT = setTimeout(function(){
+		fastballArrow1.animate({'opacity':1},1000);
+		fastballArrow2.animate({'opacity':1},1000);
+		
+		$('#fball-ttip1').fadeIn();
+		$('#fball-ttip1 .gi-button').click(function(){
+			$('#fball-ttip1').fadeOut();
+			fastballArrow1.animate({'opacity':0},1000);
+			fastballArrow2.animate({'opacity':0},1000);
+			knuckleballArrow1.attr({'x':(((fBallW-100)/2))}).animate({'opacity':1},1000);
+			knuckleballArrow2.attr({'x':(((fBallW-100)/2))}).animate({'opacity':1},1000);
+			$('#fball-ttip1').fadeOut(function(){
+				$('#fball-ttip2').fadeIn();
+				$('#fball-ttip2 .gi-button').click(function(){
+					knuckleballArrow1.animate({'opacity':0},250);
+					knuckleballArrow2.animate({'opacity':0},250);
+					knuckleball.animate({'transform':'t' + (fBallW-300) + ',' + 70 + 'r-' + 540},8000/2*.8,"");
+					fastball.animate({'transform':'t' + (fBallW-300) + ',' + 0 + 'r-' + 6120},8000/2*.5,"");
+					fastballShadow.animate({'transform':'t' + (fBallW-300) + ',' + 0},8000/2*.5,"");
+					knuckleballShadow.animate({'transform':'t' + (fBallW-300) + ',' + 70},8000/2*.8,"");
+						
+					$('#fball-ttip2').fadeOut(function(){
+						$('#fball-ttip3').fadeIn();
+						$('#fball-ttip3 .gi-button').click(function(){
+							$('#fball-ttip3').fadeOut();	
+						})
+					})
+				})
+			});
+		})
+
+	},8000/2*.5)
+
+	setTimeout(function(){
+		
+	},(8000*.82/2)+4000);
+	
+	},250);
+	
+});/* - Searchable area - */
+
+var sw = 300,
+	sh = 250,
+	searchBalls = [],
+	searchBallsFinal = [],
+	searchBallsFirst = [];
+	
+
+var searchStrike = [],
+	searchBall = [],
+	searchHit = [],
+	searchStrikeBalls = [],
+	searchBallBalls = [],
+	searchHitBalls = [],
+	searchTypesBalls = [],
+	searchShadow = [],
+	searchTimer,
+	countKnuckleball = 0,
+	countFastball = 0,
+	knuckleballSpeed = 0,
+	fastballSpeed = 0;
+
+
+function doSearch(queryArr){
+$('#IE-warning').hide();
+// Switch query based on viz number
+$('#search-viz').html('');
+var searchViz = Raphael('search-viz',sw,sh)
+var strikezone = searchViz.rect(strikeZoneX,strikeZoneY,strikeZoneW,strikeZoneH).attr({'fill':'white','stroke':'#b0b0b0','stroke-width':3,'opacity':.7});
+
+// Clear results
+	sw = 300,
+	sh = 250,
+	searchBalls = [],
+	searchBallsFinal = [],
+	searchBallsFirst = [],
+	searchStrike = [],
+	searchBall = [],
+	searchHit = [],
+	searchTypes = [],
+	searchTypesBalls = [],
+	searchShadow = [],
+	countKnuckleball = 0,
+	countFastball = 0,
+	knuckleballSpeed = 0,
+	fastballSpeed = 0;
+	clearTimeout(searchTimer);
+if(Browser.IE){
+var resultRecords = [];
+	$.each(pitches,function(i,pitch){
+	var query = 0;
+	
+	$.each(queryArr, function(i,quer){
+		if(pitch[quer.name] != quer.value){
+			query++;
+		}
+	})	
+		if(query == 0){
+			resultRecords.push(pitch);	
+		}	
+	});
+	if(resultRecords.length > 100){
+		$('#IE-warning').show();
+		$('#IE-warning a').click(function(){
+			populateRest();
+			return false;
+		})
+	} else {
+		populateRest();
+	}
+} else {
+	populateRest();
+}
+function populateRest(){
+$.each(pitches,function(i,pitch){
+	var query = 0;
+	$.each(queryArr, function(i,quer){
+		if(pitch[quer.name] != quer.value){
+			query++;
+		}
+	})
+
+	if(query == 0){
+	if(pitch["PITCH_NAME"] == "Knuckleball") countKnuckleball++, knuckleballSpeed += parseInt(pitch["PLATE_SPEED"]);
+	if(pitch["PITCH_NAME"] == "Four-seam FB") countFastball++, fastballSpeed += parseInt(pitch["PLATE_SPEED"]);
+	
+	var ball = searchViz.image("pitches-assets/baseball.png",homeBase+pitch["INIT_POS_X"]*(mult/1.5),h-(pitch["INIT_POS_Z"])*(mult/1.5),0,0).attr({'opacity':0});
+	
+	var ballShadow = searchViz.circle((homeBase+(pitch["PLATE_X"])*mult)+ballWidth/2,(h-(pitch["PLATE_Z"])*mult)+ballWidth/2,ballWidth/2).attr({'stroke':'none','opacity':0});
+	
+	// Save type of pitch
+	var color = '#4c87d6';
+	if(pitch["PITCH_TYPE"] == 'ball' || pitch["PITCH_TYPE"] == 'blocked_ball'|| pitch["PITCH_TYPE"] == 'intent_ball'|| pitch["PITCH_TYPE"] == 'pitchout'|| pitch["PITCH_TYPE"] == 'balk' || pitch["PITCH_TYPE"] == 'intent_walk'||  pitch["PITCH_TYPE"] == 'hit_by_pitch' || pitch["PITCH_TYPE"] == 'passed_ball'|| pitch["PITCH_TYPE"] == 'walk'|| pitch["PITCH_TYPE"] == 'wild_pitch'){
+		searchBall.push(ballShadow);
+		searchBallBalls.push(ball);
+		color = '#f0c810';
+	} else if (pitch["PITCH_TYPE"] == 'home_run' || pitch["PITCH_TYPE"] == 'single'  || pitch["PITCH_TYPE"] == 'triple'  || pitch["PITCH_TYPE"] == 'double'){
+		searchHit.push(ballShadow);	
+		searchHitBalls.push(ball);	
+		color = '#4c87d6';
+	} else {
+		searchStrike.push(ballShadow);
+		searchStrikeBalls.push(ball);
+		color = '#d60000';
+	}
+
+	ballShadow.attr({'fill':color});
+	
+	// Save the vars
+	searchBalls.push(ball);
+	searchShadow.push(ballShadow);
+	searchBallsFinal.push([homeBase+(pitch["PLATE_X"])*mult,h-(pitch["PLATE_Z"])*mult]);
+	searchBallsFirst.push([homeBase+(pitch["INIT_POS_X"])*mult,h-(pitch["INIT_POS_Z"])*mult])
+	}
+})//each.pitches
+
+// Apply most likely scenario
+var content = "Pitch: ";
+
+if(countKnuckleball > countFastball){
+	content += ' Knuckleball'
+			+ '<br />Average speed: ' + Math.round((knuckleballSpeed/countKnuckleball)) + ' MPH';
+} else {
+	content += ' Fastball'
+			+ '<br />Average speed: ' + Math.round((fastballSpeed/countFastball)) + ' MPH';
+};
+$('.likely-pitch').html(content);
+// Save the relevant pitches to refine later
+searchTypes = [searchStrike,searchBall,searchHit];
+searchTypesBalls = [searchStrikeBalls,searchBallBalls,searchHitBalls];
+
+if(searchBalls.length > 0){
+if(searchBalls.length > 50) $('#skip-animation').show(); 
+var p = ' pitches';
+if(searchBalls.length == 1) p = ' pitch';
+$('.pitches-found').text(addCommas(searchBalls.length) + p + ' found' );
+var i = searchBalls.length-1;
+	searchTimer = setInterval(function(){
+	searchBalls[i].animate({'opacity':1,'width':ballWidth,'height':ballWidth,'x':searchBallsFinal[i][0],'y':searchBallsFinal[i][1]},250,'<>',function(){
+	});
+	searchShadow[i].animate(fadein.delay(1000));
+	
+	i--;
+	if(i<0) clearInterval(searchTimer), $('#skip-animation').hide();
+
+},50);
+	$('#search-toggle').show();
+} else {
+	$('.search-error').show();
+	$('#search-toggle').hide();
+}
+}//if IE
+
+}//doSearch
+
+
+
+$('#skip-animation').click(function(){
+	clearInterval(searchTimer);
+	$.each(searchBalls, function(i,ball){
+		ball.attr({'opacity':0});
+		searchShadow[i].attr({'opacity':.4});
+	})
+	$(this).hide();
+	return false;
+})
+$('#search-toggle input').click(function(){
+	$('#search-toggle input').each(function(i,d){
+		if($(this).is(":checked")){
+			$.each(searchTypes[i], function(m){
+				this.animate({'opacity':.4},150);
+				searchTypesBalls[i][m].animate({'opacity':1},150);
+			});
+		} else {
+			$.each(searchTypes[i], function(m){
+				this.animate({'opacity':0},150);
+				searchTypesBalls[i][m].animate({'opacity':0},150);
+			});
+		}
+	})
+})
+var allowableDates = "2012-04-07,2012-04-13,2012-04-18,2012-04-25,2012-04-30,2012-05-06,2012-05-12,2012-05-17,2012-05-22,2012-05-27,2012-06-02,2012-06-07,2012-06-13,2012-06-18,2012-06-24,2012-06-29,2012-07-05,2012-07-14,2012-07-19,2012-07-21,2012-07-24,2012-07-29,2012-08-03,2012-08-09,2012-08-15,2012-08-20,2012-08-25,2012-08-31,2012-09-05,2012-09-11,2012-09-17,2012-09-22,2012-09-27,2012-10-02".split(',');
+function onDaysOnly(date){
+	var day = date.getDate();
+	if(day<10) day = '0' + day;
+	var month = date.getMonth()+1;
+	if(month<10) month = '0' + month;
+	var oldDate = date.getFullYear() + '-' + month + '-' + day;
+	for(i=0;i<allowableDates.length;i++){
+		if(allowableDates[i] == oldDate){
+			return [1];
+		} else {
+			var ret = [0];
+		}
+		if(i==allowableDates.length-1) {
+			return ret;
+		}
+	}
+}
+$( "#datepicker" ).datepicker({
+      changeMonth: true,
+      minDate: new Date(2012, 4 - 1, 07),
+      maxDate: new Date(2012, 10 - 1, 02),
+      defaultDate: new Date(2012, 4 - 1, 07),
+	  beforeShowDay: onDaysOnly
+    });
+    
+availableBatters = [
+"Abad, Fernando","Abreu, Bobby","Adams, Matt","Alonso, Yonder","Altuve, Jose","Alvarez, Pedro","Ankiel, Rick","Arrieta, Jake","Baker, John","Barajas, Rod","Barmes, Clint","Barnes, Brandon","Beltran, Carlos","Berkman, Lance","Bernadina, Roger","Betemit, Wilson","Blackmon, Charlie","Bloomquist, Willie","Bogusevic, Brian","Bonifacio, Emilio","Bourn, Michael","Brantly, Rob","Brown, Andrew","Brown, Domonic","Bruce, Jay","Buck, John","Buck, Travis","Buehrle, Mark","Cabrera, Everth","Cahill, Trevor","Cano, Robinson","Carpenter, Matt","Castro, Jason","Chambers, Adron","Colvin, Tyler","Correia, Kevin","Cousins, Scott","Cozart, Zack","Craig, Allen","Cruz, Luis","Cruz, Tony","Davis, Chris","Denorfia, Chris","DeRosa, Mark","Descalso, Daniel","Desmond, Ian","Dobbs, Greg","Downs, Matt","Drew, Stephen","Dunn, Mike","Ellis, A.J.","Eovaldi, Nathan","Espinosa, Danny","Ethier, Andre","Flores, Jesus","Fontenot, Mike","Forsythe, Logan","Fowler, Dexter","Francisco, Juan","Frandsen, Kevin","Frazier, Todd","Freeman, Freddie","Freese, David","Furcal, Rafael","Galvis, Freddy","Goldschmidt, Paul","Gonzalez, Gio","Gordon, Dee","Granderson, Curtis","Green, Nick","Greenberg, Adam","Greene, Tyler","Guzman, Jesus","Gwynn, Tony","Hairston, Jerry","Hamels, Cole","Hanigan, Ryan","Hanson, Tommy","Harang, Aaron","Hardy, J.J.","Harper, Bryce","Harrison, Josh","Hayes, Brett","Headley, Chase","Hernandez, Gorkys","Herrera, Elian","Herrera, Jonathan","Heyward, Jason","Hill, Aaron","Hinske, Eric","Holliday, Matt","Holt, Brock","Howard, Ryan","Hundley, Nick","Ibanez, Raul","Infante, Omar","Jackson, Ryan","Jay, Jon","Jennings, Desmond","Jeter, Derek","Johnson, Chris","Johnson, Elliot","Johnson, Josh","Johnson, Nick","Jones, Adam","Jones, Chipper","Jones, Garrett","Joyce, Matt","Jurrjens, Jair","Kearns, Austin","Kemp, Matt","Kennedy, Adam","Kubel, Jason","LaRoche, Adam","Latos, Mat","Leake, Mike","Lee, Carlos","Lee, Cliff","LeMahieu, DJ","Leon, Sandy","Lobaton, Jose","Lombardozzi, Steve","Loney, James","Lowrie, Jed","Ludwick, Ryan","Lynn, Lance","Marte, Starling","Martinez, Fernando","Matsui, Hideki","Mayberry, John","Maybin, Cameron","McCann, Brian","McCutchen, Andrew","McDonald, James","McDonald, John","Mercer, Jordy","Mesoraco, Devin","Molina, Yadier","Montero, Miguel","Moore, Scott","Moore, Tyler","Morrison, Logan","Morse, Michael","Moscoso, Guillermo","Nady, Xavier","Nix, Laynce","Nolasco, Ricky","Norris, Bud","Pacheco, Jordan","Parra, Gerardo","Parrino, Andy","Pastornicky, Tyler","Pearce, Steve","Pena, Carlos","Pence, Hunter","Petersen, Bryan","Phillips, Brandon","Pierre, Juan","Polanco, Placido","Prado, Martin","Presley, Alex","Quentin, Carlos","Ramirez, Hanley","Ransom, Cody","Reyes, Jose","Reynolds, Mark","Rhymes, Will","Richard, Clayton","Roberts, Brian","Roberts, Ryan","Robinson, Shane","Rodriguez, Alex","Rodriguez, Sean","Rolen, Scott","Rollins, Jimmy","Rosario, Wilin","Ross, David","Ruggiano, Justin","Ruiz, Carlos","Sabathia, CC","Sanchez, Gaby","Saunders, Joe","Schafer, Jordan","Schierholtz, Nate","Schumaker, Skip","Snider, Travis","Solano, Donovan","Solano, Jhonatan","Stammen, Craig","Stanton, Giancarlo","Stewart, Chris","Stubbs, Drew","Suzuki, Kurt","Swisher, Nick","Tabata, Jose","Teixeira, Mark","Tekotte, Blake","Thome, Jim","Turner, Jacob","Uggla, Dan","Upton, B.J.","Upton, Justin","Uribe, Juan","Utley, Chase","Van Slyke, Scott","Velazquez, Gil","Venable, Will","Victorino, Shane","Volquez, Edinson","Votto, Joey","Wainwright, Adam","Walker, Neil","Wallace, Brett","Wang, Chien-Ming","Werth, Jayson","Wheeler, Ryan","White, Alex","Wieters, Matt","Wigginton, Ty","Young, Chris","Zimmerman, Ryan","Zimmermann, Jordan"
+]
+
+$('#batter').autocomplete({
+	source: function(request, response) {
+        var results = $.ui.autocomplete.filter(availableBatters, request.term);
+        response(results.slice(0, 10));
+    }
+})
+
+$('#search-button').click(function(){
+	var queryArr = [];
+	$('.search-error').hide();
+	// Get query
+		//batter
+	var batter = $('#batter').val();
+	if(batter!='') queryArr.push({'value':batter,'name':'BATTER_NAME'});
+		//date
+	var date = $('#datepicker').val();
+	if(date!='') {
+		var newDate = date.split('/')[2] + '-' + date.split('/')[0] + '-' + date.split('/')[1];
+		queryArr.push({'value':newDate, 'name':'GAME_DATE'});
+	}
+		//inning
+	var inning = $('#inning').val();
+	if(inning!='Any') queryArr.push({'value':inning,'name':"INNING"});
+		//batting side
+	var battingSide = $('#batting-side').val();
+	if(battingSide != 'Any') queryArr.push({'value':battingSide.split('')[0],'name':"BAT_SIDE"});
+		//pitch number
+	var pitchNumber = $('#pitch-number').val();
+	if(pitchNumber!='Any') queryArr.push({'value':pitchNumber,'name':"PITCH#"});
+		//pitch name
+	var pitchName = $('#pitch-name').val();
+	if(pitchName!='Any'){
+		if(pitchName == 'Four-seam fastball') pitchName = 'Four-seam FB';
+		queryArr.push({'value':pitchName,'name':"PITCH_NAME"});
+	}
+	doSearch(queryArr);
+	return false;
+})
+
+$('#jump-to-search').click(function(){
+	$('body,html').animate({'scrollTop':$('#search-target').offset().top-20},1000);
+	return false;
+})
+
+})
+</script>
+<div id="gi">
+<div id="gi-intro">
+	<div id="gi-intro-text">
+	<div id="gi-header">The Science of</div>
+	<div id="gi-header-2">R.A. DICKEY</div>
+<p>Coming off the best season of his long career, 38-year-old pitcher R.A. Dickey is set to make his debut in Toronto on April 2. His signature knuckleball pitch will be crucial to the Blue Jays’ season. But just how does he do it?</p>
+	<p>The Globe analyzed every pitch he made last season — nearly 3,500 in all — to explain his methodology.</p>
+<!--	<p><a class="gi-button" id="jump-to-search" href="#search">Jump to the search</a></p>-->
+	</div>
+	<div id="gi-intro-bg"><img src="pitches-assets/radickey-bg.jpg" /></div>
+</div>
+
+
+<div class="gi-section">
+<a name="search" id="search-target"></a>
+<h3>Search every pitch</h3>
+<p>Search using the fields below to see all pitches based on batter, date, inning and other important factors. The pitches are colour-coded according to balls, strikes and hits.</p>
+<div class="viz-con" style="width:100%">
+	<div id="search-input">
+		<strong>Search by any or all fields</strong>
+		<div class="gi-clearfloat"></div>
+		<label for="batter">Batter:</label><input id="batter" type="text" /><br />
+		<div class="gi-clearfloat"></div>
+		<label for="daterange">Date:</label> <input type="text" id="datepicker" />
+		<div class="gi-clearfloat"></div>
+		<label for="batting-side">Batting side:</label><select id="batting-side"><option>Any</option><option>Right</option><option>Left</option></select><br />
+		<div class="gi-clearfloat"></div>
+		<label for="pitch-number">Pitch number:</label><select id="pitch-number"><option>Any</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select><br />
+		<div class="gi-clearfloat"></div>
+		<label for="inning">Inning:</label><select id="inning"><option>Any</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select><br />
+		<div class="gi-clearfloat"></div>
+		<label for="pitch-name">Pitch name:</label><select id="pitch-name"><option>Any</option><option>Knuckleball</option><option>Four-seam fastball</option></select><br />
+
+		<div class="gi-clearfloat" style="height:10px"></div>
+		<p><a class="gi-button" id="search-button" href="#go">Show results</a></p>
+		<p><span class="search-error">Sorry, no results were found.</span></p>
+		<p id="skip-animation"><a href="#">Skip the animation</a></p>
+		<p id="IE-warning">More than 100 pitches found. Narrow your search or <a href="#show">show anyway</a>.</p>
+	</div>
+	<div id="search-viz"><img src="pitches-assets/placeholder.png" /></div>
+	<div id="search-toggle">
+		<strong>Refine your results</strong>
+		<div class="gi-clearfloat"></div>
+		<span class="pitches-found"></span>
+		<div class="gi-clearfloat"></div>
+		<input type="checkbox" name="strikes" value="strikes" checked=""><span style="color:#d60000">Strikes</span><br />
+		<input type="checkbox" name="balls" value="balls" checked=""><span style="color:#f0c810">Balls</span><br />
+		<input type="checkbox" name="hits" value="hits" checked=""><span style="color:#4c87d6">Hits</span>
+		<div class="gi-clearfloat"></div>
+		<p></p>
+		<strong>Likely pitch</strong>
+		<div class="likely-pitch"></div>
+	</div>
+</div>
+</div>
+
+
+<div class="gi-section right">
+<h3>The Four-seam Fastball</h3>
+<p>Dickey throws a lot of knuckleballs — nearly 85 per cent of all pitches last season, or just more than 2,800. His other weapon is the four-seam fastball, which he deploys selectively, only 14 per cent of the time. He relies on it most often for the first or fifth pitch in the count and reaches maximum velocity in the seventh inning. Three out of four times, his previous pitch is a slow knuckleball that averages 70 mph. And he’s more than twice as likely to throw his fastball against a right-hander as opposed to a lefty. By comparison, he throws his knuckleball evenly against hitters on either side of the plate.</p>
+</div>
+
+
+
+<div class="gi-section">
+<div id="viz-fastball-container">
+	<h3>Speed and spin</h3>
+	<p>The knuckleball's lack of spin makes it very difficult to hit. A fastball will rotate 16 to 17 times before reaching the plate. But the knuckleball typically rotates just once or twice. This allows wind and drag to have a larger effect on its overall movement, which is believed to cause the ball to wobble on its way to the plate. Speed is also a factor. While Dickey's knuckleball is unusually fast, it still crosses the plate at an average speed of 70 mph, with the slowest being 51 mph and the fastest being 76 mph. By comparison, his four-seam fastball is clocked between 79.2 and 86 mph).</p>
+	<p><a class="gi-button" id="viz-fastball-button" href="#go">Play animation</a></p>
+	<div id="fball-tooltips">
+		<div class="fball-tooltip" id="fball-ttip1">
+			<h4>THE SMOOTH FASTBALL</h4>
+The fastball's spin allows air to pass over the seams more evenly, creating a smooth trajectory that cuts through the air.
+		<div class="gi-clearfloat"></div>
+			<a href="#next" class="gi-button">NEXT</a>
+		</div>
+		<div class="fball-tooltip" id="fball-ttip2">
+			<h4>THE CHOPPY KNUCKLEBALL</h4>
+On a knuckleball, however, the slow rotation causes air to pass unevenly over the seams, causing turbulence.
+		<div class="gi-clearfloat"></div>
+			<a href="#next" class="gi-button">NEXT</a>
+		</div>
+		
+		<div class="fball-tooltip" id="fball-ttip3">
+			<h4>KNUCKLEBALL VS. FASTBALL</h4>
+The ball breaks in the direction of turbulence. But the pitcher, batter and catcher can never know which direction the ball will break. Dickey may throw knuckleballs almost exclusively, but batters keep guessing because they're never sure where it will break.
+		<div class="gi-clearfloat"></div>
+			<a href="#next" class="gi-button">CLOSE</a>
+		</div>
+	<div id="viz-fastball"></div>
+	</div>
+</div>
+
+</div>
+
+
+<div class="gi-section right">
+<h3>Dickey's Back-to-back Beauties</h3>
+<p>Dickey’s best performance to date was his back-to-back complete game one-hitters in June of last year (both coming against American League East teams, no less). On June 13 he defeated the Tampa Bay Rays 9-1, striking out 12 and walking none. A week later he threw 114 pitches against the Baltimore Orioles, striking out 13 in a 5-0 complete-game shutout. With that start, Dickey became the first major leaguer in 24 years to throw consecutive one-hitters (and get this – the last guy to do that was Toronto’s Dave Stieb in 1988) and the 10th since 1900. Below, find a breakdown of each inning of the Baltimore game, with each pitch colour-coded to identify pitch type and whether it was a ball, strike or hit.
+<p><a class="gi-button" id="bestday-button" href="#go">Play animation</a></p>
+		<div class="gi-clearfloat"></div>
+<p></p>
+<div class="viz-con">
+	<div id="bestday">
+		<div class="viz-con noline">
+		<h4>1ST INNING</h4>
+		<div class="smallMultiple" id="strikezone0"></div>
+		<div class="tooltip"></div>
+	</div>
+	<div class="viz-con noline">
+		<h4>2ND INNING</h4>
+		<div class="smallMultiple" id="strikezone1"></div>
+		<div class="tooltip"></div>
+	</div>
+	<div class="viz-con noline">
+		<h4>3RD INNING</h4>
+		<div class="smallMultiple" id="strikezone2"></div>
+		<div class="tooltip"></div>
+	</div>
+	<div class="viz-con">
+		<h4>4TH INNING</h4>
+		<div class="smallMultiple" id="strikezone3"></div>
+		<div class="tooltip"></div>
+	</div>
+	<div class="viz-con">
+		<h4>5TH INNING</h4>
+		<div class="smallMultiple" id="strikezone4"></div>
+		<div class="tooltip"></div>
+	</div>
+	<div class="viz-con">
+		<h4>6TH INNING</h4>
+		<div class="smallMultiple" id="strikezone5"></div>
+		<div class="tooltip"></div>
+	</div>
+	<div class="viz-con">
+		<h4>7TH INNING</h4>
+		<div class="smallMultiple" id="strikezone6"></div>
+		<div class="tooltip"></div>
+	</div>
+	<div class="viz-con">
+		<h4>8TH INNING</h4>
+		<div class="smallMultiple" id="strikezone7"></div>
+		<div class="tooltip"></div>
+	</div>
+	<div class="viz-con">
+		<h4>9NTH INNING</h4>
+		<div class="smallMultiple" id="strikezone8"></div>
+		<div class="tooltip"></div>
+	</div>
+	
+	</div>
+</div>
+</div>
+
+
+
+
+</div><!-- #gi -->
