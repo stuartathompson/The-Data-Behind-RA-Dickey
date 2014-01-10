@@ -1,11 +1,9 @@
-dickey
+The Data Behind R.A. Dickey
 ======
 
-The Data Behind R.A. Dickey: Interactive
-
-Coding, design, layout and data work by Stuart A. Thompson
-
 Explore every pitch by the Blue Jay's new pitcher R.A. Dickey.
+
+Coding, design, layout, data crunching and writing by Stuart A. Thompson
 
 See the full version here: http://www.theglobeandmail.com/sports/baseball/the-data-behind-ra-dickey-a-pitch-by-pitch-breakdown-of-his-2012-season/article10623044/
 
